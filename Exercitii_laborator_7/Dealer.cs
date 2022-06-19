@@ -40,7 +40,7 @@ namespace Ex_1
             int contor = 0;
             Random rand = new Random();
 
-            for (int i = rand.Next(Pachet.Carti.Count - 1); i < Pachet.Carti.Count;)
+            for (int i = rand.Next(Pachet.Carti.Count - 1); i < Pachet.Carti.Count; i = rand.Next(Pachet.Carti.Count - 1))
             {
                 if (!(contor < 5))
                     break;
@@ -50,8 +50,6 @@ namespace Ex_1
                     cartiImpartite.Add(Pachet.Carti[i]);
                     contor++;
                 }
-
-                i = rand.Next(Pachet.Carti.Count - 1);
             }
 
             return cartiImpartite;

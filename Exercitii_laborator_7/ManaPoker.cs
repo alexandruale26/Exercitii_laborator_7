@@ -1,83 +1,91 @@
-﻿
+﻿using System.Collections.Generic;
+
 namespace Ex_1
 {
     class ManaPoker
     {
-        private readonly Carte[] manaCarti;
-        public IerarhiePoker rezultat;
+        private readonly List<Carte> manaCarti;
 
-
-        public ManaPoker(Carte[] manaCarti)
+        public ManaPoker(List<Carte> manaCarti)
         {
             this.manaCarti = manaCarti;
         }
 
-        public void ChintaDeCuloare()
+
+        public bool ChintaRoiala() // A K Q J 10 - acelasi simbol
         {
-            bool suntInOrdine = false;
-            bool auAceeasiCuloare = false;
+            Simbol simbolActiv = manaCarti[0].Simbol;
 
-            int valoareAnterioara;
-            int valoareCurenta = manaCarti[0].Valoare;
-
-            Simbol culoareCurenta = manaCarti[0].Simbol;
-
-
-            foreach (Carte carte in manaCarti)
+            for (int i = 0; i < manaCarti.Count; i++)
             {
-                valoareAnterioara = valoareCurenta;
-                valoareCurenta = carte.Valoare;
+                int nr = manaCarti[i].Valoare;
 
-                if (valoareAnterioara + 1  == valoareCurenta)
+                if (nr != 1 || nr != 10 || nr != 11 || nr != 12 || nr != 13)
                 {
-                    suntInOrdine = true;
-                    break;
+                    return false;
                 }
-                else
-                    suntInOrdine = true;
 
-
-                if (carte.Simbol == Simbol.InimaNeagra || carte.Simbol == Simbol.Trifoi && culoareCurenta == Simbol.InimaNeagra || culoareCurenta == Simbol.Trifoi)
+                if (manaCarti[i].Simbol != simbolActiv)
                 {
-                    auAceeasiCuloare = true;
-                }
-                else if (carte.Simbol == Simbol.InimaRosie || carte.Simbol == Simbol.Romb && culoareCurenta == Simbol.InimaRosie || culoareCurenta == Simbol.Romb)
-                {
-                    auAceeasiCuloare = true;
-                }
-                else
-                {
-                    auAceeasiCuloare = false;
-                    break;
+                    return false;
                 }
             }
-
-            if (suntInOrdine && auAceeasiCuloare)
-                this.rezultat = IerarhiePoker.ChintaDeCuloare;
-
+            return true;
         }
 
-        public void Careu()
+
+        public bool ChintaDeCuloare() // 5 carti in ordine de acelasi simbol
         {
-            int contorCurent = 0;
+            Simbol simbolActiv = manaCarti[0].Simbol;
+
+            for (int i = 0; i < manaCarti.Count - 1; i++)
+            {
+                if (manaCarti[i].Valoare + 1 != manaCarti[i + 1].Valoare)
+                {
+                    return false;
+                }
+
+                if (manaCarti[i + 1].Simbol != simbolActiv)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+
+        public bool Careu() // 4 carti de acelasi numar
+        {
+            int contorCurent;
             int contorAnterior = 0;
 
-            for (int i = 0; i < manaCarti.Length; i++)
+            for (int i = 0; i < 2; i++)
             {
-                for (int j = 0; j < manaCarti.Length; j++)
+                contorCurent = 0;
+
+                for (int j = 0; j < manaCarti.Count; j++)
                 {
                     if (manaCarti[i] == manaCarti[j])
                         contorCurent++;
                 }
 
                 if (contorCurent >= contorAnterior)
-                    contorAnterior = contorCurent;
+                { 
+                    contorAnterior = contorCurent; 
+                }
             }
 
             if (contorAnterior >= 4)
-                rezultat = IerarhiePoker.Careu;
+                return true;
+            else 
+                return false;
         }
 
+
+        public bool FullHouse() // 3 carti de acelasi numar + o pereche
+        {
+
+        }
 
     }
 

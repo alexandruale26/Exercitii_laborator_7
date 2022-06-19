@@ -17,9 +17,8 @@ namespace Ex_1
             List<Carte> pachetNou = new List<Carte>();
 
             int numaraCarti = 0;
-            int contorSimboluri = Enum.GetNames(typeof(Simbol)).Length;
 
-            for (int i = 0; i < contorSimboluri; i++)
+            for (int i = 0; i < Enum.GetNames(typeof(Simbol)).Length; i++)
             {
                 for (int j = 0; j < 13; j++)
                 {
@@ -30,7 +29,6 @@ namespace Ex_1
                     }
                 }
             }
-
             return pachetNou;
         }
 
