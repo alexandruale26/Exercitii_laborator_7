@@ -6,15 +6,12 @@ namespace Ex_1
     class ManaPoker
     {
         private readonly List<Carte> manaCarti;
-
         private int[] ValoriOrdonate { get; set; }
-
         public ManaPoker(List<Carte> manaCarti)
         {
             this.manaCarti = manaCarti;
             this.ValoriOrdonate = OrdoneazaValoriCarti();
         }
-
 
         private int[] OrdoneazaValoriCarti()
         {
@@ -33,20 +30,21 @@ namespace Ex_1
         public bool ChintaRoiala() // A K Q J 10 - acelasi simbol
         {
             Simbol simbolActiv = manaCarti[0].Simbol;
+            List<int> listaVerificareValori = new List<int>() { 1, 10, 11, 12, 13 };
 
             for (int i = 0; i < manaCarti.Count; i++)
             {
-                int nr = manaCarti[i].Valoare;
-
-                if (nr != 1 || nr != 10 || nr != 11 || nr != 12 || nr != 13)
+                if (listaVerificareValori.Contains(manaCarti[i].Valoare))
                 {
-                    return false;
-                }
+                    if (manaCarti[i].Simbol != simbolActiv)
+                    {
+                        return false;
+                    }
+                    listaVerificareValori.Remove(manaCarti[i].Valoare);
 
-                if (manaCarti[i].Simbol != simbolActiv)
-                {
-                    return false;
+                    continue;
                 }
+                return false;
             }
             return true;
         }
@@ -82,7 +80,7 @@ namespace Ex_1
 
                 for (int j = 0; j < manaCarti.Count; j++)
                 {
-                    if (manaCarti[i] == manaCarti[j])
+                    if (manaCarti[i].Valoare == manaCarti[j].Valoare)
                         contor++;
                 }
 
@@ -107,7 +105,7 @@ namespace Ex_1
 
                 for (int j = 0; j < manaCarti.Count; j++)
                 {
-                    if (manaCarti[i] == manaCarti[j])
+                    if (manaCarti[i].Valoare == manaCarti[j].Valoare)
                         contor++;
                 }
 
@@ -166,7 +164,7 @@ namespace Ex_1
 
                 for (int j = 0; j < manaCarti.Count; j++)
                 {
-                    if (manaCarti[i] == manaCarti[j])
+                    if (manaCarti[i].Valoare == manaCarti[j].Valoare)
                         contorCurent++;
                 }
 
@@ -182,6 +180,7 @@ namespace Ex_1
         public bool DouaPerechi() // 2 perechi
         {
             int contor;
+            int valoarePerecheAnterioara = 0;
             int perecheaUnu = -1;
             int perecheaDoi = 0;
 
@@ -191,16 +190,17 @@ namespace Ex_1
 
                 for (int j = 0; j < manaCarti.Count; j++)
                 {
-                    if (manaCarti[i] == manaCarti[j])
+                    if (manaCarti[i].Valoare == manaCarti[j].Valoare && manaCarti[i].Valoare != valoarePerecheAnterioara)
                         contor++;
                 }
 
-                if (contor == 2 && perecheaUnu < 2)
+                if (contor >= 2 && perecheaUnu < 2)
                 {
                     perecheaUnu = 2;
+                    valoarePerecheAnterioara = manaCarti[i].Valoare;
                     continue;
                 }
-                else if (contor == 2)
+                else if (contor >= 2)
                 {
                     perecheaDoi = 2;
                 }
@@ -223,11 +223,11 @@ namespace Ex_1
 
                 for (int j = 0; j < manaCarti.Count; j++)
                 {
-                    if (manaCarti[i] == manaCarti[j])
+                    if (manaCarti[i].Valoare == manaCarti[j].Valoare)
                         contor++;
                 }
 
-                if (contor == 2)
+                if (contor >= 2)
                 {
                     return true;
                 }
@@ -236,9 +236,9 @@ namespace Ex_1
         }
 
 
-        public int CarteMare() // cea mai mare carte
+        public int CeaMaiMareCarte() // cea mai mare carte
         {
-            return ValoriOrdonate[ValoriOrdonate.Length-1];
+            return ValoriOrdonate[ValoriOrdonate.Length - 1];
         }
     }
 

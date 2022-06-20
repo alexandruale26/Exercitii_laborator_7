@@ -18,8 +18,8 @@ namespace Ex_1
 
     enum Simbol
     {
-        InimaRosie,
-        InimaNeagra,
+        Inima_Rosie,
+        Inima_Neagra,
         Romb,
         Trifoi
     }

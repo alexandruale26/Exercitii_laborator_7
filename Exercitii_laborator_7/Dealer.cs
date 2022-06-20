@@ -7,13 +7,13 @@ namespace Ex_1
     {
         public Pachet Pachet { get; private set; }
 
-
         public Dealer(Pachet pachet)
         {
             this.Pachet = pachet;
         }
 
-        public void AmestecaPachet()
+
+        public void AmestecaPachetCarti()
         {
             List<Carte> pachetAmestecat = new List<Carte>();
 

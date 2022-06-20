@@ -27,26 +27,72 @@ namespace Ex_1
              */
 
 
+            bool continuaJoc = true;
 
-            Pachet pachet = new Pachet();
-            Dealer dealer = new Dealer(pachet);
+            while (continuaJoc)
+            {
+                JocNou();
 
-            dealer.AmestecaPachet();
+                Console.WriteLine("\nApasati ENTER pentru a continua sau ESC pentru a iesi din joc\n");
 
-            AfisareManaCarti(dealer.Pachet.Carti);
-
-            List<Carte> manaNoua = dealer.ImparteCarti();
-
-            Console.WriteLine("\n\nNoua mana este\n");
-            AfisareManaCarti(manaNoua);
-
+                if (Console.ReadKey().Key == ConsoleKey.Enter)
+                    continuaJoc =  true;
+                else 
+                    continuaJoc = false;
+            }
         }
 
-        static void AfisareManaCarti(List<Carte> pachet)
+
+        static void JocNou()
         {
+            Pachet pachetNou = new Pachet();
+            Dealer dealer = new Dealer(pachetNou);
+
+            dealer.AmestecaPachetCarti();
+            
+            List<Carte> manaNoua =  dealer.ImparteCarti();
+            ManaPoker manaPoker = new ManaPoker(manaNoua);
+
+            AfisareCarti(manaNoua);
+
+            if (manaPoker.ChintaRoiala())
+                Console.WriteLine("\nAveti Chinta roiala");
+
+            else if (manaPoker.ChintaDeCuloare())
+                Console.WriteLine("\nAveti Chinta de culoare");
+
+            else if (manaPoker.Careu())
+                Console.WriteLine("\nAveti Careu");
+
+            else if (manaPoker.FullHouse())
+                Console.WriteLine("\nAveti Full House");
+
+            else if (manaPoker.Flush())
+                Console.WriteLine("\nAveti Flush");
+
+            else if (manaPoker.Chinta())
+                Console.WriteLine("\nAveti Chinta");
+
+            else if (manaPoker.TreiDeUnFel())
+                Console.WriteLine("\nAveti Trei de-un fel");
+
+            else if (manaPoker.DouaPerechi())
+                Console.WriteLine("\nAveti Doua perechi");
+
+            else if (manaPoker.OPereche())
+                Console.WriteLine("\nAveti 1 pereche");
+
+            else
+                Console.WriteLine($"\nAveti cea mai mare carte {manaPoker.CeaMaiMareCarte()}");
+        }
+
+        static void AfisareCarti(List<Carte> pachet)
+        {
+            Console.WriteLine($"Mana ta este formata din: \n");
+
             foreach (Carte carte in pachet)
             {
-                Console.WriteLine($"Valoare: {carte.Valoare}   Simbol: {carte.Simbol}");
+                Console.WriteLine($"{carte.Valoare} de {carte.Simbol}");
             }
         }
     }
