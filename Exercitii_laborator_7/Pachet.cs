@@ -3,15 +3,26 @@ using System.Collections.Generic;
 
 namespace Ex_1
 {
+    /// <summary>
+    /// Modeleaza un pachet
+    /// </summary>
     class Pachet
     {
         public List<Carte> Carti { get; set; }
 
+        /// <summary>
+        /// Creeaza un pachet
+        /// </summary>
         public Pachet()
         {
             this.Carti = GenerarePachet();
         }
 
+
+        /// <summary>
+        /// Genereaza un pachet de carti
+        /// </summary>
+        /// <returns>Returneaza o lista de carti</returns>
         private List<Carte> GenerarePachet()
         {
             List<Carte> pachetNou = new List<Carte>();
@@ -31,6 +42,5 @@ namespace Ex_1
             }
             return pachetNou;
         }
-
     }
 }

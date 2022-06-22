@@ -14,23 +14,39 @@ namespace Ex_2
 
         public void OperatiuniContBancar()
         {
-            Console.WriteLine("Introduceti 1 pentru afisare Sold\nIntroduceti 2 pentru a adauga bani\n" +
-               "Introduceti 3 pentru a retrage bani\n");
+            if (contBancar.tipCont == Cont.Curent)
+            {
+                Console.WriteLine("1 afisare Sold | 2 Adauga bani " +
+               "| 3 Retrage bani");
+            }
+            else
+            {
+                Console.WriteLine("1 Afisare sold | 2 Adauga bani " +
+               "| 3 Retrage bani | 4 Recalculare dobanda");
+            }
 
-            int operatie = int.Parse(Console.ReadLine());
+            int operatiune = int.Parse(Console.ReadLine());
 
-            switch (operatie)
+            switch (operatiune)
             {
                 case 1:
                     contBancar.Tipareste();
                     break;
                 case 2:
-                    Console.WriteLine("Introduceti suma\n");
-                    contBancar.AdaugaBani(decimal.Parse(Console.ReadLine()));
+                    Console.WriteLine("\nIntroduceti suma");
+                    contBancar.AdaugaBani(double.Parse(Console.ReadLine()));
                     break;
                 case 3:
-                    Console.WriteLine("Introduceti suma\n");
-                    contBancar.RetrageBani(decimal.Parse(Console.ReadLine()));
+                    Console.WriteLine("\nIntroduceti suma");
+                    contBancar.RetrageBani(double.Parse(Console.ReadLine()));
+                    break;
+
+                case 4:
+                    if (contBancar.tipCont == Cont.Economii)
+                    {
+                        Console.WriteLine("\nIntroduceti procentul");
+                        contBancar.RecalculareDobanda(double.Parse(Console.ReadLine()));
+                    }
                     break;
             }
         }

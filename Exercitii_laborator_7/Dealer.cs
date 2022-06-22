@@ -3,16 +3,25 @@ using System.Collections.Generic;
 
 namespace Ex_1
 {
+    /// <summary>
+    /// Modeleaza un dealer
+    /// </summary>
     class Dealer
     {
         public Pachet Pachet { get; private set; }
 
+        /// <summary>
+        /// Creeaza un pachet
+        /// </summary>
+        /// <param name="pachet">parametru de tip pachet</param>
         public Dealer(Pachet pachet)
         {
             this.Pachet = pachet;
         }
 
-
+        /// <summary>
+        /// Amesteca un pachet
+        /// </summary>
         public void AmestecaPachetCarti()
         {
             List<Carte> pachetAmestecat = new List<Carte>();
@@ -32,7 +41,10 @@ namespace Ex_1
             Pachet.Carti = pachetAmestecat;
         }
 
-
+        /// <summary>
+        /// Alege aleator 5 carti din pachet
+        /// </summary>
+        /// <returns>Returneaza o lista de carti</returns>
         public List<Carte> ImparteCarti()
         {
             List<Carte> cartiImpartite = new List<Carte>();
@@ -53,7 +65,6 @@ namespace Ex_1
             }
 
             return cartiImpartite;
-
         }
     }
 }

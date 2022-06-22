@@ -3,10 +3,18 @@ using System.Collections.Generic;
 
 namespace Ex_1
 {
+    /// <summary>
+    /// Modeleaza o mana de poker
+    /// </summary>
     class ManaPoker
     {
         private readonly List<Carte> manaCarti;
         private int[] ValoriOrdonate { get; set; }
+
+        /// <summary>
+        /// Creeaza un pachet
+        /// </summary>
+        /// <param name="manaCarti"> returneaza o lista de carti</param>
         public ManaPoker(List<Carte> manaCarti)
         {
             this.manaCarti = manaCarti;
@@ -27,6 +35,10 @@ namespace Ex_1
         }
 
 
+        /// <summary>
+        /// Verifica daca este Chinta roiala
+        /// </summary>
+        /// <returns>Returneaza un bool</returns>
         public bool ChintaRoiala() // A K Q J 10 - acelasi simbol
         {
             Simbol simbolActiv = manaCarti[0].Simbol;
@@ -50,6 +62,10 @@ namespace Ex_1
         }
 
 
+        /// <summary>
+        /// Verifica daca este Chinta de culoare
+        /// </summary>
+        /// <returns>Returneaza un bool</returns>
         public bool ChintaDeCuloare() // 5 carti in ordine de acelasi simbol
         {
             Simbol simbolActiv = manaCarti[0].Simbol;
@@ -70,6 +86,10 @@ namespace Ex_1
         }
 
 
+        /// <summary>
+        /// Verifica daca este Careu
+        /// </summary>
+        /// <returns>Returneaza un bool</returns>
         public bool Careu() // 4 carti de acelasi numar
         {
             int contor;
@@ -93,6 +113,10 @@ namespace Ex_1
         }
 
 
+        /// <summary>
+        /// Verifica daca este Full House
+        /// </summary>
+        /// <returns>Returneaza un bool</returns>
         public bool FullHouse() // 3 carti de acelasi numar + o pereche
         {
             int contor;
@@ -126,6 +150,10 @@ namespace Ex_1
         }
 
 
+        /// <summary>
+        /// Verifica daca este Flush
+        /// </summary>
+        /// <returns>Returneaza un bool</returns>
         public bool Flush() // 5 carti oarecare cu acelasi simbol
         {
             Simbol simbolActiv = manaCarti[0].Simbol;
@@ -141,6 +169,10 @@ namespace Ex_1
         }
 
 
+        /// <summary>
+        /// Verifica daca este Chinta
+        /// </summary>
+        /// <returns>Returneaza un bool</returns>
         public bool Chinta() // 5 carti in ordine de simboluri diferite
         {
             for (int i = 0; i < ValoriOrdonate.Length - 1; i++)
@@ -154,6 +186,10 @@ namespace Ex_1
         }
 
 
+        /// <summary>
+        /// Verifica daca sunt Trei de-un fel
+        /// </summary>
+        /// <returns>Returneaza un bool</returns>
         public bool TreiDeUnFel() // 3 carti de acelasi numar
         {
             int contorCurent;
@@ -177,6 +213,10 @@ namespace Ex_1
         }
 
 
+        /// <summary>
+        /// Verifica daca sunt doua perechi
+        /// </summary>
+        /// <returns>Returneaza un bool</returns>
         public bool DouaPerechi() // 2 perechi
         {
             int contor;
@@ -213,6 +253,10 @@ namespace Ex_1
         }
 
 
+        /// <summary>
+        /// Verifica daca este o pereche
+        /// </summary>
+        /// <returns>Returneaza un bool</returns>
         public bool OPereche() // o pereche
         {
             int contor;
@@ -236,9 +280,14 @@ namespace Ex_1
         }
 
 
+
+        /// <summary>
+        /// Arata cea mai mare carte
+        /// </summary>
+        /// <returns>Returneaza cea mai mare valoare</returns>
         public int CeaMaiMareCarte() // cea mai mare carte
         {
-            return ValoriOrdonate[ValoriOrdonate.Length - 1];
+            return ValoriOrdonate[^1];
         }
     }
 
