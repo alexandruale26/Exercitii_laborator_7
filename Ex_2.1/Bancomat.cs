@@ -1,28 +1,33 @@
 ﻿using System;
 
-namespace Ex_2
+namespace Ex_2._1
 {
-    class Client
+    class Bancomat
     {
-        private readonly ContBancar contBancar;
+        private readonly ContCurent contBancar;
 
-        public Client(ContBancar contBancar)
+        /// <summary>
+        /// Creeaza un bancomat
+        /// </summary>
+        /// <param name="contBancar">Accepta un parametru de tip ContBancar</param>
+        public Bancomat (ContCurent contBancar)
         {
             this.contBancar = contBancar;
         }
 
 
+        /// <summary>
+        /// Efectueaza operatiuni bancare
+        /// </summary>
         public void OperatiuniContBancar()
         {
-            if (contBancar.tipCont == Cont.Curent)
+            if (contBancar.Cont == Cont.Curent)
             {
-                Console.WriteLine("1 afisare Sold | 2 Adauga bani " +
-               "| 3 Retrage bani");
+                Console.WriteLine("1 Afisare sold | 2 Adauga bani | 3 Retrage bani");
             }
             else
             {
-                Console.WriteLine("1 Afisare sold | 2 Adauga bani " +
-               "| 3 Retrage bani | 4 Recalculare dobanda");
+                Console.WriteLine("1 Afisare sold | 2 Adauga bani | 3 Retrage bani | 4 Recalculare dobanda");
             }
 
             int operatiune = int.Parse(Console.ReadLine());
@@ -40,9 +45,8 @@ namespace Ex_2
                     Console.WriteLine("\nIntroduceti suma");
                     contBancar.RetrageBani(double.Parse(Console.ReadLine()));
                     break;
-
                 case 4:
-                    if (contBancar.tipCont == Cont.Economii)
+                    if (contBancar.Cont == Cont.Economii || contBancar.Cont == Cont.Investitii)
                     {
                         Console.WriteLine("\nIntroduceti procentul");
                         contBancar.RecalculareDobanda(double.Parse(Console.ReadLine()));

@@ -7,6 +7,8 @@ namespace Ex_2._1
     /// </summary>
     class ContInvestitii : ContEconomii
     {
+        public ContInvestitii(Cont cont) : base(cont) { }
+
         private DateTime urmatoareaRetragere = new DateTime();
 
 

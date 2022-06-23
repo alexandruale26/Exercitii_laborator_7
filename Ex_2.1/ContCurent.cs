@@ -8,19 +8,21 @@ namespace Ex_2._1
     class ContCurent
     {
         public double Sold { get; set; }
+        public Cont Cont { get; private set; }
 
 
         /// <summary>
         /// Creeaza un cont curent
         /// </summary>
-        public ContCurent()
+        public ContCurent(Cont cont)
         {
             this.Sold = 0f;
+            this.Cont = cont;
         }
 
 
         /// <summary>
-        /// Mareste soldul
+        /// Adauga bani si afiseaza soldul
         /// </summary>
         /// <param name="suma">Accepta un parametru de tip double</param>
         public void AdaugaBani(double suma)
@@ -38,7 +40,7 @@ namespace Ex_2._1
 
 
         /// <summary>
-        /// Retrage bani
+        /// Retrage bani si afiseaza soldul
         /// </summary>
         /// <param name="suma">Accepta un parametru de tip double</param>
         public virtual void RetrageBani(double suma)
@@ -58,36 +60,10 @@ namespace Ex_2._1
 
 
         /// <summary>
-        /// Recalculeaza dobanda
+        /// Recalculeaza dobanda si afiseaza soldul
         /// </summary>
         /// <param name="procentDobanda">Accepta un parametru de tip double</param>
         public virtual void RecalculareDobanda(double procentDobanda) { }
-
-
-        /// <summary>
-        /// Efectueaza operatiuni bancare
-        /// </summary>
-        public virtual void OperatiuniContBancar()
-        {
-            Console.WriteLine("1 afisare Sold | 2 Adauga bani | 3 Retrage bani");
-            
-            int operatiune = int.Parse(Console.ReadLine());
-
-            switch (operatiune)
-            {
-                case 1:
-                    Tipareste();
-                    break;
-                case 2:
-                    Console.WriteLine("\nIntroduceti suma");
-                    AdaugaBani(double.Parse(Console.ReadLine()));
-                    break;
-                case 3:
-                    Console.WriteLine("\nIntroduceti suma");
-                    RetrageBani(double.Parse(Console.ReadLine()));
-                    break;
-            }
-        }
 
 
         /// <summary>
@@ -97,5 +73,13 @@ namespace Ex_2._1
         {
             Console.WriteLine($"Soldul dumneavoastra este {this.Sold:N2}");
         }
+    }
+
+
+    enum Cont
+    {
+        Curent,
+        Economii,
+        Investitii
     }
 }

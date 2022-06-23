@@ -7,35 +7,7 @@ namespace Ex_2._1
     /// </summary>
     class ContEconomii : ContCurent
     {
-        /// <summary>
-        /// Efectueaza operatiuni bancare
-        /// </summary>
-        public override void OperatiuniContBancar()
-        {
-            Console.WriteLine("1 Afisare sold | 2 Adauga bani | 3 Retrage bani | 4 Recalculare dobanda");
-
-            int operatiune = int.Parse(Console.ReadLine());
-
-            switch (operatiune)
-            {
-                case 1:
-                    Tipareste();
-                    break;
-                case 2:
-                    Console.WriteLine("\nIntroduceti suma");
-                    AdaugaBani(double.Parse(Console.ReadLine()));
-                    break;
-                case 3:
-                    Console.WriteLine("\nIntroduceti suma");
-                    RetrageBani(double.Parse(Console.ReadLine()));
-                    break;
-                case 4:
-                    Console.WriteLine("\nIntroduceti procentul");
-                    RecalculareDobanda(double.Parse(Console.ReadLine()));
-                    break;
-            }
-        }
-
+        public ContEconomii(Cont cont) : base(cont) { }
 
         /// <summary>
         /// Recalculeaza dobanda

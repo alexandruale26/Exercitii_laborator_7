@@ -27,20 +27,18 @@ namespace Ex_2
 
             ContBancar contNou = new ContBancar(Cont.Economii);
             //ContBancar contNou = new ContBancar(Cont.Curent);
-
-            Client clientNou = new Client(contNou);
             
-            BT24(clientNou);
+            BT24(contNou);
 
         }
 
-        static void BT24(Client clientNou)
+        static void BT24(ContBancar contNou)
         {
             bool continuaOperatieBancara = true;
 
             while (continuaOperatieBancara)
             {
-                clientNou.OperatiuniContBancar();
+                contNou.OperatiuniContBancar();
 
                 Console.WriteLine("\nApasati ENTER pentru a continua sau ESC pentru a iesi\n");
 

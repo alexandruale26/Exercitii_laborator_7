@@ -20,20 +20,22 @@ namespace Ex_2._1
             */
 
 
-            //ContCurent contNou = new ContCurent();
-            //ContEconomii contNou = new ContEconomii();
-            ContInvestitii contNou = new ContInvestitii();
+            //ContCurent contNou = new ContCurent(Cont.Curent);
+            //ContEconomii contNou = new ContEconomii(Cont.Economii);
+            ContInvestitii contNou = new ContInvestitii(Cont.Investitii);
 
-            BT24(contNou);
+            Bancomat bancomat = new Bancomat(contNou);
+
+            BT24(bancomat);
         }
 
-        static void BT24(ContCurent clientNou)
+        static void BT24(Bancomat bancomat)
         {
             bool continuaOperatieBancara = true;
 
             while (continuaOperatieBancara)
             {
-                clientNou.OperatiuniContBancar();
+                bancomat.OperatiuniContBancar();
 
                 Console.WriteLine("\nApasati ENTER pentru a continua sau ESC pentru a iesi\n");
 

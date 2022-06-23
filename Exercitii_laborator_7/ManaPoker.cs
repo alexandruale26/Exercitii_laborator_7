@@ -10,16 +10,18 @@ namespace Ex_1
     {
         private readonly List<Carte> manaCarti;
         private int[] ValoriOrdonate { get; set; }
+        private IerarhiePoker ierarhie;
+
 
         /// <summary>
         /// Creeaza un pachet
         /// </summary>
-        /// <param name="manaCarti"> returneaza o lista de carti</param>
         public ManaPoker(List<Carte> manaCarti)
         {
             this.manaCarti = manaCarti;
             this.ValoriOrdonate = OrdoneazaValoriCarti();
         }
+
 
         private int[] OrdoneazaValoriCarti()
         {
@@ -38,8 +40,7 @@ namespace Ex_1
         /// <summary>
         /// Verifica daca este Chinta roiala
         /// </summary>
-        /// <returns>Returneaza un bool</returns>
-        public bool ChintaRoiala() // A K Q J 10 - acelasi simbol
+        private void ChintaRoiala() // A K Q J 10 - acelasi simbol
         {
             Simbol simbolActiv = manaCarti[0].Simbol;
             List<int> listaVerificareValori = new List<int>() { 1, 10, 11, 12, 13 };
@@ -50,23 +51,22 @@ namespace Ex_1
                 {
                     if (manaCarti[i].Simbol != simbolActiv)
                     {
-                        return false;
+                        return;
                     }
                     listaVerificareValori.Remove(manaCarti[i].Valoare);
 
                     continue;
                 }
-                return false;
+                return;
             }
-            return true;
+            ierarhie = IerarhiePoker.ChintaRoiala;
         }
 
 
         /// <summary>
         /// Verifica daca este Chinta de culoare
         /// </summary>
-        /// <returns>Returneaza un bool</returns>
-        public bool ChintaDeCuloare() // 5 carti in ordine de acelasi simbol
+        private void ChintaDeCuloare() // 5 carti in ordine de acelasi simbol
         {
             Simbol simbolActiv = manaCarti[0].Simbol;
 
@@ -74,23 +74,22 @@ namespace Ex_1
             {
                 if (ValoriOrdonate[i] + 1 != ValoriOrdonate[i + 1])
                 {
-                    return false;
+                    return;
                 }
 
                 if (manaCarti[i + 1].Simbol != simbolActiv)
                 {
-                    return false;
+                    return;
                 }
             }
-            return true;
+            ierarhie = IerarhiePoker.ChintaDeCuloare;
         }
 
 
         /// <summary>
         /// Verifica daca este Careu
         /// </summary>
-        /// <returns>Returneaza un bool</returns>
-        public bool Careu() // 4 carti de acelasi numar
+        private void Careu() // 4 carti de acelasi numar
         {
             int contor;
 
@@ -106,18 +105,16 @@ namespace Ex_1
 
                 if (contor >= 4)
                 {
-                    return true;
+                    ierarhie = IerarhiePoker.Careu;
                 }
             }
-            return false;
         }
 
 
         /// <summary>
         /// Verifica daca este Full House
         /// </summary>
-        /// <returns>Returneaza un bool</returns>
-        public bool FullHouse() // 3 carti de acelasi numar + o pereche
+        private void FullHouse() // 3 carti de acelasi numar + o pereche
         {
             int contor;
             int treiCarti = 0;
@@ -144,17 +141,14 @@ namespace Ex_1
             }
 
             if (treiCarti == 3 && douaCarti == 2)
-                return true;
-            else
-                return false;
+                ierarhie = IerarhiePoker.FullHouse;
         }
 
 
         /// <summary>
         /// Verifica daca este Flush
         /// </summary>
-        /// <returns>Returneaza un bool</returns>
-        public bool Flush() // 5 carti oarecare cu acelasi simbol
+        private void Flush() // 5 carti oarecare cu acelasi simbol
         {
             Simbol simbolActiv = manaCarti[0].Simbol;
 
@@ -162,35 +156,33 @@ namespace Ex_1
             {
                 if (manaCarti[i].Simbol != simbolActiv)
                 {
-                    return false;
+                    return;
                 }
             }
-            return true;
+            ierarhie = IerarhiePoker.Flush;
         }
 
 
         /// <summary>
         /// Verifica daca este Chinta
         /// </summary>
-        /// <returns>Returneaza un bool</returns>
-        public bool Chinta() // 5 carti in ordine de simboluri diferite
+        private void Chinta() // 5 carti in ordine de simboluri diferite
         {
             for (int i = 0; i < ValoriOrdonate.Length - 1; i++)
             {
                 if (ValoriOrdonate[i] + 1 != ValoriOrdonate[i + 1])
                 {
-                    return false;
+                    return;
                 }
             }
-            return true;
+            ierarhie = IerarhiePoker.Chinta;
         }
 
 
         /// <summary>
         /// Verifica daca sunt Trei de-un fel
         /// </summary>
-        /// <returns>Returneaza un bool</returns>
-        public bool TreiDeUnFel() // 3 carti de acelasi numar
+        private void TreiDeUnFel() // 3 carti de acelasi numar
         {
             int contorCurent;
 
@@ -206,18 +198,16 @@ namespace Ex_1
 
                 if (contorCurent == 3)
                 {
-                    return true;
+                    ierarhie = IerarhiePoker.TreiDeUnFel;
                 }
             }
-            return false;
         }
 
 
         /// <summary>
         /// Verifica daca sunt doua perechi
         /// </summary>
-        /// <returns>Returneaza un bool</returns>
-        public bool DouaPerechi() // 2 perechi
+        private void DouaPerechi() // 2 perechi
         {
             int contor;
             int valoarePerecheAnterioara = 0;
@@ -247,17 +237,14 @@ namespace Ex_1
             }
 
             if (perecheaUnu == perecheaDoi)
-                return true;
-            else
-                return false;
+                ierarhie = IerarhiePoker.DouaPerechi;
         }
 
 
         /// <summary>
         /// Verifica daca este o pereche
         /// </summary>
-        /// <returns>Returneaza un bool</returns>
-        public bool OPereche() // o pereche
+        private void OPereche() // o pereche
         {
             int contor;
 
@@ -273,21 +260,77 @@ namespace Ex_1
 
                 if (contor >= 2)
                 {
-                    return true;
+                    ierarhie = IerarhiePoker.OPereche;
                 }
             }
-            return false;
         }
-
 
 
         /// <summary>
         /// Arata cea mai mare carte
         /// </summary>
-        /// <returns>Returneaza cea mai mare valoare</returns>
-        public int CeaMaiMareCarte() // cea mai mare carte
+        private void CeaMaiMareCarte() // cea mai mare carte
         {
-            return ValoriOrdonate[^1];
+            ierarhie = IerarhiePoker.CeaMaiMareCarte;
+        }
+
+
+        /// <summary>
+        /// Calculeaza rezultatul
+        /// </summary>
+        public void CalculeazaMana()
+        {
+            CeaMaiMareCarte();
+            OPereche();
+            DouaPerechi();
+            TreiDeUnFel();
+            Chinta();
+            Flush();
+            FullHouse();
+            Careu();
+            ChintaDeCuloare();
+            ChintaRoiala();
+        }
+
+
+        /// <summary>
+        /// Afiseaza rezultatul
+        /// </summary>
+        public void AfisareRezultat()
+        {
+            switch (ierarhie)
+            {
+                case IerarhiePoker.ChintaRoiala:
+                    Console.WriteLine("\nAveti Chinta roiala");
+                    break;
+                case IerarhiePoker.ChintaDeCuloare:
+                    Console.WriteLine("\nAveti Chinta de culoare");
+                    break;
+                case IerarhiePoker.Careu:
+                    Console.WriteLine("\nAveti Careu");
+                    break;
+                case IerarhiePoker.FullHouse:
+                    Console.WriteLine("\nAveti Full House");
+                    break;
+                case IerarhiePoker.Flush:
+                    Console.WriteLine("\nAveti Flush");
+                    break;
+                case IerarhiePoker.Chinta:
+                    Console.WriteLine("\nAveti Chinta");
+                    break;
+                case IerarhiePoker.TreiDeUnFel:
+                    Console.WriteLine("\nAveti Trei de-un fel");
+                    break;
+                case IerarhiePoker.DouaPerechi:
+                    Console.WriteLine("\nAveti Doua perechi");
+                    break;
+                case IerarhiePoker.OPereche:
+                    Console.WriteLine("\nAveti 1 pereche");
+                    break;
+                case IerarhiePoker.CeaMaiMareCarte:
+                    Console.WriteLine($"\nAveti cea mai mare carte {ValoriOrdonate[^1]}");
+                    break;
+            }
         }
     }
 
@@ -302,6 +345,6 @@ namespace Ex_1
         TreiDeUnFel, // 3 carti de acelasi numar
         DouaPerechi, // 2 perechi
         OPereche, // o pereche
-        CarteMare // cea mai mare carte
+        CeaMaiMareCarte // cea mai mare carte 
     }
 }

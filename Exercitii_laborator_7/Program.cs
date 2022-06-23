@@ -55,35 +55,9 @@ namespace Ex_1
 
             AfisareCarti(manaNoua);
 
-            if (manaPoker.ChintaRoiala())
-                Console.WriteLine("\nAveti Chinta roiala");
-
-            else if (manaPoker.ChintaDeCuloare())
-                Console.WriteLine("\nAveti Chinta de culoare");
-
-            else if (manaPoker.Careu())
-                Console.WriteLine("\nAveti Careu");
-
-            else if (manaPoker.FullHouse())
-                Console.WriteLine("\nAveti Full House");
-
-            else if (manaPoker.Flush())
-                Console.WriteLine("\nAveti Flush");
-
-            else if (manaPoker.Chinta())
-                Console.WriteLine("\nAveti Chinta");
-
-            else if (manaPoker.TreiDeUnFel())
-                Console.WriteLine("\nAveti Trei de-un fel");
-
-            else if (manaPoker.DouaPerechi())
-                Console.WriteLine("\nAveti Doua perechi");
-
-            else if (manaPoker.OPereche())
-                Console.WriteLine("\nAveti 1 pereche");
-
-            else
-                Console.WriteLine($"\nAveti cea mai mare carte {manaPoker.CeaMaiMareCarte()}");
+            manaPoker.CalculeazaMana();
+            manaPoker.AfisareRezultat();
+            
         }
 
         static void AfisareCarti(List<Carte> pachet)
